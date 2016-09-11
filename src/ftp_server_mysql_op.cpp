@@ -202,7 +202,7 @@ int mysql_insert_video_record(MYSQL &mysql, const char*introduce, const char*upl
 	 * Copyright (c) limin AT ISPC-USTC
 	 * */
 	char request[256] = {0};
-	strcpy(request, "insert into courses_video (index, introduce, upload_time, title, video_path, course_id) values ( 1, '");
+	strcpy(request, "insert into courses_video (introduce, upload_time, title, video_path, course_id) values ('");
 	strcat(request, introduce);
 	strcat(request, "', '");
 	strcat(request, upload_time);
