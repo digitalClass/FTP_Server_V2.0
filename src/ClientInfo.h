@@ -39,6 +39,7 @@ typedef struct clientinfo_t
 
 	mutable char classid[MAX_ID_LEN] = {0};
 	mutable unsigned int fileindex = 0;
+	mutable char classtitle[64] = {0};
 	mutable char filename[FILENAME_LEN];
 
 	bool operator < (const struct clientinfo_t &a) const

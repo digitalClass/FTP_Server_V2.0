@@ -244,6 +244,7 @@ int getclassinfo(clientinfo_t &client)
 				{
 					strncpy(client.classid, client.classids[i], 5);
 					client.fileindex = 0;
+					strncpy(client.classtitle, client.classinfo[i], strlen(client.classinfo[i]));
 					cout << buf << " has been set as the class now!" <<endl;
 					return 0;
 				}
@@ -279,7 +280,8 @@ void PrintClientInfo(clientinfo_t &client)
 		 << "\n\t Socket_ID : " << client.socketfd
 		 << "\n\t FileName  : " << client.filename
 		 << "\n\t Username  : " << client.username
-		 << "\n\t ClassID   : " << client.classid
+		 << "\n\t Class ID  : " << client.classid
+		 << "\n\t Class Tile: " << client.classtitle
 		 << "\n\t Cookies   : " << client.cookies
 		 << "\n\t State     : " << client.active
 		 << endl;

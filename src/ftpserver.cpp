@@ -210,6 +210,7 @@ void ftp_server::loginmanager(clientinfo_t client, void *pParam)
 					 << "\n\t FileName  : " << (*iter).filename
 					 << "\n\t Username  : " << (*iter).username
 					 << "\n\t ClassID   : " << (*iter).classid
+					 << "\n\t Class Tile: " << client.classtitle
 					 << "\n\t Cookies   : " << (*iter).cookies
 					 << "\n\t State     : " << (*iter).active
 					 << endl;
@@ -328,6 +329,23 @@ void * ftp_server::ManageThread(void *pParam)
 					}while(res>0);
 					cout << "Test Point: file closed!" << endl;
 					fclose(fp);
+					// Insert the file record to the mysql table--courses_video
+					char introduce[256] = {0};
+					strcpy(introduce, "This is the video of class--");
+					strcat(introduce, (*iter).classtitle);
+					strcat(introduce, ", the video index is: ");
+					char file_index[5] = {0};
+					sprintf(file_index, "%d", (*iter).fileindex);
+					strcat(introduce, file_index);
+					strcat(introduce, ".");
+					time_t t;
+					time(&t);
+					int res_insert = mysql_insert_video_record(mysql, introduce, ctime(&t), (*iter).classtitle, (*iter).filename, (*iter).classid);
+					if(res_insert==-1)
+					{
+						cout << "ManageThread: Failed to insert the record to the mysql!"<< endl;
+					}
+
 					if( res==0 )
 					{
 						// Client exit

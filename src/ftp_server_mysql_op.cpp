@@ -185,5 +185,43 @@ int mysql_passwd_check(const char* passwd, MYSQL mysql, clientinfo_t &client)
 }
 
 
+int mysql_insert_video_record(MYSQL &mysql, const char*introduce, const char*upload_time, const char*title, const char*video_path, const char*course_id)
+{
+	/*
+	 * Function Name: mysql_insert_video_record
+	 * Author		: liminkmf@mail.ustc.edu.cn
+	 * Version		: 2016-09-11 V2.0
+	 * Usage		:
+	 * Description	: This is the function used to add video path record to mysql table courses_video
+	 *     mysql database.
+	 * Return code   :
+	 *     0 : username verification pass!
+	 *     1 : username doesn't exist
+	 *     2 : username is not a teacher
+	 *     -1: failed connect to the database
+	 * Copyright (c) limin AT ISPC-USTC
+	 * */
+	char request[256] = {0};
+	strcpy(request, "insert into courses_video (index, introduce, upload_time, title, video_path, course_id) values ( 1, '");
+	strcat(request, introduce);
+	strcat(request, "', '");
+	strcat(request, upload_time);
+	strcat(request, "', '");
+	strcat(request, title);
+	strcat(request, "', '");
+	strcat(request, video_path);
+	strcat(request, "',");
+	strcat(request, course_id);
+	strcat(request, " );");
+	cout << "mysql_insert_video_record : " << request << endl;
 
+	int res_add = mysql_real_query(&mysql, request, strlen(request));
+	if( res_add )
+	{
+		cout << "mysql_insert_video_record Error: " << mysql_errno(&mysql) << " from " << mysql_error(&mysql) << endl;
+		return -1;
+	}
+
+	return 0;
+}
 
