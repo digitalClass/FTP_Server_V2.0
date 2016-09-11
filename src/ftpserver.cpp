@@ -338,9 +338,13 @@ void * ftp_server::ManageThread(void *pParam)
 					sprintf(file_index, "%d", (*iter).fileindex);
 					strcat(introduce, file_index);
 					strcat(introduce, ".");
-					time_t t;
-					time(&t);
-					int res_insert = mysql_insert_video_record(mysql, introduce, ctime(&t), (*iter).classtitle, (*iter).filename, (*iter).classid);
+					time_t utc_time;
+					tm *local_time = NULL;
+					char str_time[100];
+					utc_time = time(NULL);
+					local_time = localtime(&utc_time);
+					strftime(str_time, sizeof(str_time), "%Y#%m#%d %H+%%M+%S", local_time);
+					int res_insert = mysql_insert_video_record(mysql, introduce,str_time, (*iter).classtitle, (*iter).filename, (*iter).classid);
 					if(res_insert==-1)
 					{
 						cout << "ManageThread: Failed to insert the record to the mysql!"<< endl;
