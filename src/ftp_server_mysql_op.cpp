@@ -229,3 +229,27 @@ int mysql_insert_video_record(MYSQL &mysql, const int fileindex, const char*intr
 	return 0;
 }
 
+int mysql_get_fileindex(MYSQL &mysql,const char*course_id)
+{
+	char request[512] = {0};
+	strcpy(request, "select offset from courses_video where course_id=");
+	strcat(request, course_id);
+
+	MYSQL_RES *res_fileindex = query(request, mysql);
+
+	if( mysql_num_rows(res_fileindex)==0)
+	{
+		return 0;
+	}
+	else
+	{
+		int max_index = 0;
+		MYSQL_ROW res_data_fileindex ;
+		while( res_data_fileindex = mysql_fetch_row(res_fileindex) )
+		{
+			max_index = max_index>atoi(res_data_fileindex[0])? max_index : atoi(res_data_fileindex[0]);
+		}
+		return max_index;
+	}
+
+}

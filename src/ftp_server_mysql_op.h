@@ -25,6 +25,6 @@ int mysql_insert_video_record(MYSQL &mysql, const int fileindex, const char*intr
 int mysql_username_check(const char* username, MYSQL &mysql,  clientinfo_t &client);
 int mysql_passwd_check(const char* passwd, MYSQL mysql, clientinfo_t &client);
 
-
+int mysql_get_fileindex(MYSQL &mysql,const char*course_id);
 
 #endif /* FTP_SERVER_MYSQL_OP_H_ */

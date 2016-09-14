@@ -239,7 +239,9 @@ void ftp_server::loginmanager(clientinfo_t client, void *pParam)
 			if ( infores==0 )
 			{
 				// Reset the client class info
-				client.fileindex = 0;
+				// Get the max fileindex and set the index
+				client.fileindex = mysql_get_fileindex(mysql, client.classid);
+				//
 				videoname(client.filename, client.classid, client.fileindex);
 				cookies_gen(client);
 				sleep(1);
