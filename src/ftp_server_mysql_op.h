@@ -20,7 +20,7 @@ void PrintMySqlInfo(MYSQL &mysql);
 // Query
 MYSQL_RES* query(const char* request, MYSQL &mysql);
 
-int mysql_insert_video_record(MYSQL &mysql, const char*introduce, const char*upload_time, const char*title, const char*video_path, const char*course_id);
+int mysql_insert_video_record(MYSQL &mysql, const int fileindex, const char*introduce, const char*upload_time, const char*title, const char*video_path, const char*course_id);
 
 int mysql_username_check(const char* username, MYSQL &mysql,  clientinfo_t &client);
 int mysql_passwd_check(const char* passwd, MYSQL mysql, clientinfo_t &client);
