@@ -201,7 +201,7 @@ int mysql_insert_video_record(MYSQL &mysql, const int fileindex, const char*intr
 	 *     -1: failed connect to the database
 	 * Copyright (c) limin AT ISPC-USTC
 	 * */
-	char request[256] = {0};
+	char request[512] = {0};
 	strcpy(request, "insert into courses_video (offset, introduce, upload_time, title, video_path, course_id) values (");
 	char fileindex_str[5] = {0};
 	sprintf(fileindex_str,"%d", fileindex);
