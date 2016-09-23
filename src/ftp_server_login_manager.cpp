@@ -19,7 +19,7 @@ void videoname(char*filename, char *classnum, int index)
 	 * */
 	bzero(filename, FILENAME_LEN);
 	char const *prefix = "/media/digitalClass/medias/";
-	char const *suffix = ".avi";
+	char const *suffix = ".mp4";
 	strcat(filename,prefix);
 	strcat(filename,classnum);
 	mkdir(filename, 0755);
